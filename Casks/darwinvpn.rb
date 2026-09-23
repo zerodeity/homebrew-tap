@@ -23,10 +23,8 @@ cask "darwinvpn" do
 
   binary "darwinvpn"
 
-  postflight do
-    if OS.mac?
-      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/darwinvpn"]
-    end
+  postflight_steps do
+    run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{staged_path}}/darwinvpn"]
   end
 
   # No zap stanza required
